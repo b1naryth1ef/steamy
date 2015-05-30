@@ -1,0 +1,4 @@
+build/
+dist/
+steamy.egg-info/
+*.pyc
