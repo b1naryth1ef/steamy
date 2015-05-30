@@ -106,16 +106,13 @@ class SteamAPI(object):
             raise SteamAPIError("Failed to request url `%s`" % url)
         return resp.json()
 
-    def get_trade_offer(self, id, raw=False):
+    def get_trade_offer(self, id):
         """
         Gets a TradeOffer object for the given id
         """
         data = self.request("IEconService/GetTradeOffer/v1/", {
             "tradeofferid": id
         }, timeout=10)
-
-        if not raw:
-            return TradeOffer.from_api(data)
 
         return data["response"]["offer"]
 
