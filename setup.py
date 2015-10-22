@@ -18,11 +18,8 @@ packages = [
     'steamy',
 ]
 
-requires = [
-    'requests',
-    'xmltodict',
-    'pyquery'
-]
+with open('requirements.txt') as f:
+    requires = f.readlines()
 
 with open('README.md') as f:
     readme = f.read()

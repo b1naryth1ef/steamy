@@ -86,8 +86,9 @@ class SteamAPI(object):
     """
     A wrapper around the normal steam API
     """
-    def __init__(self, key):
+    def __init__(self, key, retry=True):
         self.key = key
+        self.retry = retry
 
     def market(self, appid):
         """
@@ -101,7 +102,12 @@ class SteamAPI(object):
         """
         url = "http://api.steampowered.com/%s" % url
         data['key'] = self.key
-        resp = retry_request(lambda f: getattr(f, verb.lower())(url, params=data, **kwargs))
+
+        if self.retry:
+            resp = retry_request(lambda f: getattr(f, verb.lower())(url, params=data, **kwargs))
+        else:
+            resp = getattr(requests, verb.lower())(url, params=data, **kwargs)
+
         if not resp:
             raise SteamAPIError("Failed to request url `%s`" % url)
         return resp.json()
@@ -129,7 +135,7 @@ class SteamAPI(object):
             "relationship": relationship
         }, timeout=10)
 
-        return map(lambda i: i.get("steamid"), data["friendslist"]["friends"].values())
+        return map(lambda i: i.get("steamid"), data["friendslist"]["friends"])
 
     def get_from_vanity(self, vanity):
         """
