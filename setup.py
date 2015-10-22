@@ -3,8 +3,6 @@
 import os
 import sys
 
-import steamy
-
 try:
     from setuptools import setup
 except ImportError:
@@ -26,7 +24,7 @@ with open('README.md') as f:
 
 setup(
     name='steamy',
-    version=steamy.__version__,
+    version='0.0.5',
     description='a library for interacting with the steam API and marketplace',
     long_description=readme + '\n\n',
     author='Andrei',
