@@ -24,7 +24,7 @@ with open('README.md') as f:
 
 setup(
     name='steamy',
-    version='0.0.5',
+    version='1.0.0',
     description='a library for interacting with the steam API and marketplace',
     long_description=readme + '\n\n',
     author='Andrei',
